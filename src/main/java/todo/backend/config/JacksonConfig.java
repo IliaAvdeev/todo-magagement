@@ -1,4 +1,4 @@
-package todo.backend;
+package todo.backend.config;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
