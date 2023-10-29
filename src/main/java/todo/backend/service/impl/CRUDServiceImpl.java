@@ -2,6 +2,7 @@ package todo.backend.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
+import todo.backend.model.exception.TodoManagementException;
 import todo.backend.mapper.EntityMerger;
 import todo.backend.model.entity.HasId;
 import todo.backend.service.api.CRUDService;
@@ -18,6 +19,7 @@ public abstract class CRUDServiceImpl<E extends HasId> implements CRUDService<E>
 
     @Override
     public E create(E entity) {
+        preCreate(entity);
         return repository.save(entity);
     }
 
@@ -25,6 +27,7 @@ public abstract class CRUDServiceImpl<E extends HasId> implements CRUDService<E>
     public E patch(E entity) {
         E savedEntity = repository.findById(entity.getId()).orElseThrow();
         entityMerger.merge(entity, savedEntity);
+        prePatch(savedEntity);
         return repository.save(savedEntity);
     }
 
@@ -35,6 +38,11 @@ public abstract class CRUDServiceImpl<E extends HasId> implements CRUDService<E>
 
     @Override
     public E getById(UUID entityId) {
-        return repository.findById(entityId).orElseThrow(() -> new RuntimeException("Entity doesn't exists"));
+        return repository.findById(entityId)
+                .orElseThrow(() -> new TodoManagementException("Entity with id '" + entityId + "' doesn't exists"));
     }
+
+    protected void preCreate(E entity) {}
+
+    protected void prePatch(E entity) {}
 }
