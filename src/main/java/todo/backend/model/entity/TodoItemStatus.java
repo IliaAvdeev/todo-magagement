@@ -2,7 +2,7 @@ package todo.backend.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public enum TodoStatus {
+public enum TodoItemStatus {
     @JsonProperty("Done")
     DONE,
     @JsonProperty("Not_done")
