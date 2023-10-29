@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class JacksonConfig {
+    public static final String GLOBAL_DATETIME_FORMAT = "dd/MM/yyyy HH:mm";
+
     @Bean
     public Jackson2ObjectMapperBuilderCustomizer jsonCustomizer() {
         return builder -> builder.serializationInclusion(JsonInclude.Include.NON_NULL);

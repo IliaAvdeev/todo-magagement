@@ -6,7 +6,7 @@ import jakarta.persistence.Id;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
@@ -15,10 +15,10 @@ public class TodoItemEntity implements HasId {
     @Id
     @GeneratedValue
     private UUID id;
-    private TodoStatus status;
     private String description;
+    private TodoItemStatus status;
     @CreationTimestamp
-    private OffsetDateTime createdTime;
-    private OffsetDateTime dueDatetime;
-    private OffsetDateTime markedDoneTime;
+    private LocalDateTime createdTime;
+    private LocalDateTime dueDatetime;
+    private LocalDateTime markedDoneTime;
 }
