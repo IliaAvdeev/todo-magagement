@@ -1,12 +1,20 @@
 package todo.backend.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
 
+@Getter
 public enum TodoItemStatus {
-    @JsonProperty("Done")
-    DONE,
-    @JsonProperty("Not_done")
-    NOT_DONE,
-    @JsonProperty("Past_due")
-    PAST_DUE;
+    DONE("Done"),
+    NOT_DONE("Not done"),
+    PAST_DUE("Past due");
+
+    private final String value;
+
+    TodoItemStatus(String value) {
+        this.value = value;
+    }
+
+    public boolean is(String status) {
+        return this.value.equals(status);
+    }
 }

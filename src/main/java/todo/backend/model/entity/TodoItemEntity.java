@@ -15,8 +15,8 @@ public class TodoItemEntity implements HasId {
     @Id
     @GeneratedValue
     private UUID id;
+    private String status;
     private String description;
-    private TodoItemStatus status;
     @CreationTimestamp
     private LocalDateTime createdTime;
     private LocalDateTime dueDatetime;

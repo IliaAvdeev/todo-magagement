@@ -11,16 +11,16 @@ import java.time.LocalDateTime;
 public class TodoItemServiceImpl extends CRUDServiceImpl<TodoItemEntity> implements TodoItemService {
     @Override
     protected void preCreate(TodoItemEntity entity) {
-        entity.setStatus(TodoItemStatus.NOT_DONE);
+        entity.setStatus(TodoItemStatus.NOT_DONE.getValue());
         super.preCreate(entity);
     }
 
     @Override
     protected void prePatch(TodoItemEntity entity) {
-        if (TodoItemStatus.DONE.equals(entity.getStatus())) {
+        if (TodoItemStatus.DONE.is(entity.getStatus())) {
             entity.setMarkedDoneTime(LocalDateTime.now());
         }
-        if (TodoItemStatus.NOT_DONE.equals(entity.getStatus())) {
+        if (TodoItemStatus.NOT_DONE.is(entity.getStatus())) {
             entity.setMarkedDoneTime(null);
         }
         super.prePatch(entity);
