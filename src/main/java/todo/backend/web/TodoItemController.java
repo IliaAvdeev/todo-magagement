@@ -1,7 +1,9 @@
 package todo.backend.web;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +19,10 @@ import todo.backend.service.api.TodoItemService;
 import java.util.List;
 import java.util.UUID;
 
+import static todo.backend.model.validation.ValidationGroups.Create;
+import static todo.backend.model.validation.ValidationGroups.Patch;
+
+@Validated
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/todo-management")
@@ -37,14 +43,16 @@ public class TodoItemController {
     }
 
     @PostMapping
+    @Validated(Create.class)
     @ResponseStatus(HttpStatus.CREATED)
-    public TodoItemDto create(@RequestBody TodoItemDto todoItem) {
+    public TodoItemDto create(@Valid @RequestBody TodoItemDto todoItem) {
         return todoItemMapper.toDto(todoItemService.create(todoItemMapper.toEntity(todoItem)));
     }
 
+    @Validated(Patch.class)
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public TodoItemDto patch(@PathVariable UUID id, @RequestBody TodoItemDto todoItem) {
+    public TodoItemDto patch(@PathVariable UUID id, @Valid @RequestBody TodoItemDto todoItem) {
         todoItem.setId(id);
         return todoItemMapper.toDto(todoItemService.patch(todoItemMapper.toEntity(todoItem)));
     }

@@ -1,17 +1,34 @@
 package todo.backend.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Null;
 import lombok.Data;
-import todo.backend.model.entity.TodoStatus;
+import todo.backend.config.LocalDateTimeDeserializer;
+import todo.backend.model.entity.TodoItemStatus;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import java.util.UUID;
+
+import static todo.backend.config.JacksonConfig.GLOBAL_DATETIME_FORMAT;
+import static todo.backend.model.validation.ValidationGroups.Create;
 
 @Data
 public class TodoItemDto {
     private UUID id;
-    private TodoStatus status;
+    @NotNull(message = "The 'description' field must be filled", groups = Create.class)
     private String description;
-    private OffsetDateTime createdTime;
-    private OffsetDateTime dueDatetime;
-    private OffsetDateTime markedDoneTime;
+    @Null(message = "The 'status' field must be null", groups = Create.class)
+    private TodoItemStatus status;
+    @Null(message = "The 'createdTime' field must be null")
+    @JsonFormat(pattern = GLOBAL_DATETIME_FORMAT)
+    private LocalDateTime createdTime;
+    @JsonFormat(pattern = GLOBAL_DATETIME_FORMAT)
+    @NotNull(message = "The 'dueDatetime' field must be filled", groups = Create.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    private LocalDateTime dueDatetime;
+    @JsonFormat(pattern = GLOBAL_DATETIME_FORMAT)
+    @Null(message = "The 'markedDoneTime' field must be null")
+    private LocalDateTime markedDoneTime;
 }
