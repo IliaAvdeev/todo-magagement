@@ -12,7 +12,7 @@
     <name>todo-management</name>
     <groupId>todo.backend</groupId>
     <modelVersion>4.0.0</modelVersion>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <artifactId>todo-management</artifactId>
     <description>todo-management</description>
 
