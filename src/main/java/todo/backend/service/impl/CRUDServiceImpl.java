@@ -2,7 +2,7 @@ package todo.backend.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
-import todo.backend.mapper.EntityMerger;
+import todo.backend.merger.EntityMerger;
 import todo.backend.model.entity.HasId;
 import todo.backend.model.exception.TodoManagementException;
 import todo.backend.service.api.CRUDService;

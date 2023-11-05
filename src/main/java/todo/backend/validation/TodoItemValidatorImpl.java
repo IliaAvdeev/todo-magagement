@@ -14,7 +14,7 @@ import static todo.backend.model.entity.TodoItemStatus.DONE;
 
 @Component
 @RequiredArgsConstructor
-public class TodoItemEntityValidatorImpl implements CRUDValidator<TodoItemDto> {
+public class TodoItemValidatorImpl implements CRUDValidator<TodoItemDto> {
     private final TodoItemRepository todoItemRepository;
 
     @Override

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import todo.backend.aspect.Log;
 import todo.backend.mapper.TodoItemMapper;
 import todo.backend.model.dto.TodoItemDto;
 import todo.backend.service.api.TodoItemService;
@@ -25,7 +24,6 @@ import java.util.UUID;
 import static todo.backend.model.validation.ValidationGroups.Create;
 import static todo.backend.model.validation.ValidationGroups.Patch;
 
-@Log
 @Validated
 @RestController
 @RequiredArgsConstructor

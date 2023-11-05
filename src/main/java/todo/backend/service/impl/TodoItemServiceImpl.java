@@ -31,10 +31,10 @@ public class TodoItemServiceImpl extends CRUDServiceImpl<TodoItemEntity> impleme
     @Override
     protected void prePatch(TodoItemEntity entity) {
         if (TodoItemStatus.DONE.is(entity.getStatus())) {
-            entity.setMarkedDoneTime(LocalDateTime.now());
+            entity.setMarkedDoneDatetime(LocalDateTime.now());
         }
         if (NOT_DONE.is(entity.getStatus())) {
-            entity.setMarkedDoneTime(null);
+            entity.setMarkedDoneDatetime(null);
         }
         super.prePatch(entity);
     }

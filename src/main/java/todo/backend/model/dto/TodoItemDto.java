@@ -21,8 +21,7 @@ import static todo.backend.model.validation.ValidationGroups.Patch;
 public class TodoItemDto {
     private UUID id;
 
-    @NotNull(message = "The 'description' field must be filled", groups = Create.class)
-    @NotBlank(message = "The 'description' field must be not empty", groups = Create.class)
+    @NotBlank(message = "The 'description' field must be filled", groups = Create.class)
     private String description;
 
     @Null(message = "The 'status' field must be null", groups = Create.class)
@@ -32,7 +31,7 @@ public class TodoItemDto {
 
     @JsonFormat(pattern = GLOBAL_DATETIME_FORMAT)
     @Null(message = "The 'createdTime' field must be null")
-    private LocalDateTime createdTime;
+    private LocalDateTime createdDatetime;
 
     @JsonFormat(pattern = GLOBAL_DATETIME_FORMAT)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
@@ -42,5 +41,5 @@ public class TodoItemDto {
 
     @JsonFormat(pattern = GLOBAL_DATETIME_FORMAT)
     @Null(message = "The 'markedDoneTime' field must be null")
-    private LocalDateTime markedDoneTime;
+    private LocalDateTime markedDoneDatetime;
 }

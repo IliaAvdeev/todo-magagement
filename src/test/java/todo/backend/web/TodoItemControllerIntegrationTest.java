@@ -126,7 +126,7 @@ public class TodoItemControllerIntegrationTest {
         assertNotNull(actual);
         assertEquals(NOT_DONE.getValue(), actual.getStatus());
         assertEquals("New description", actual.getDescription());
-        assertNull(actual.getMarkedDoneTime());
+        assertNull(actual.getMarkedDoneDatetime());
     }
 
     @Test
@@ -215,7 +215,7 @@ public class TodoItemControllerIntegrationTest {
     @Test
     public void testCreateWhenCreatedTimeIsNotNull() throws Exception {
         TodoItemDto todoItemDto = createStubTodoItemDto();
-        todoItemDto.setCreatedTime(LocalDateTime.now());
+        todoItemDto.setCreatedDatetime(LocalDateTime.now());
         mockMvc.perform(post("/todo-management/todo")
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(todoItemDto)))
@@ -226,7 +226,7 @@ public class TodoItemControllerIntegrationTest {
     @Test
     public void testCreateWhenMarkedDoneTimeIsNotNull() throws Exception {
         TodoItemDto todoItemDto = createStubTodoItemDto();
-        todoItemDto.setMarkedDoneTime(LocalDateTime.now());
+        todoItemDto.setMarkedDoneDatetime(LocalDateTime.now());
         mockMvc.perform(post("/todo-management/todo")
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(todoItemDto)))
@@ -269,7 +269,7 @@ public class TodoItemControllerIntegrationTest {
                                 """))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").isNotEmpty())
-                .andExpect(jsonPath("$.markedDoneTime").isNotEmpty())
+                .andExpect(jsonPath("$.markedDoneDatetime").isNotEmpty())
                 .andExpect(jsonPath("$.status").value("Done"))
                 .andReturn()
                 .getResponse()
@@ -280,7 +280,7 @@ public class TodoItemControllerIntegrationTest {
         TodoItemEntity actual = todoItemRepository.findById(id).orElse(null);
 
         assertNotNull(actual);
-        assertNotNull(actual.getMarkedDoneTime());
+        assertNotNull(actual.getMarkedDoneDatetime());
         assertEquals(DONE.getValue(), actual.getStatus());
     }
 
@@ -340,7 +340,7 @@ public class TodoItemControllerIntegrationTest {
                                 """))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").isNotEmpty())
-                .andExpect(jsonPath("$.markedDoneTime").isNotEmpty())
+                .andExpect(jsonPath("$.markedDoneDatetime").isNotEmpty())
                 .andExpect(jsonPath("$.status").value("Done"));
 
         mockMvc.perform(patch("/todo-management/todo/{id}", id)
@@ -360,7 +360,7 @@ public class TodoItemControllerIntegrationTest {
     private void assertTodoItemEntity(TodoItemEntity actual, TodoItemDto expected) {
         assertNotNull(actual);
         assertNotNull(actual.getId());
-        assertNotNull(actual.getCreatedTime());
+        assertNotNull(actual.getCreatedDatetime());
         assertEquals(NOT_DONE.getValue(), actual.getStatus());
         assertEquals(expected.getDescription(), actual.getDescription());
         assertEquals(expected.getDueDatetime().format(DATE_TIME_FORMATTER), actual.getDueDatetime().format(DATE_TIME_FORMATTER));
