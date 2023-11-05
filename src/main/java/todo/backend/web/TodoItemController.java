@@ -1,5 +1,6 @@
 package todo.backend.web;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,7 @@ import static todo.backend.model.validation.ValidationGroups.Patch;
 @Validated
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "Todo Item Controller")
 @RequestMapping("/todo-management/todo")
 public class TodoItemController {
     private final TodoItemMapper todoItemMapper;
